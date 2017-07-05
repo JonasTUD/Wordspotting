@@ -1,5 +1,4 @@
 def wordspotting():
-    print "wordspotting"
     # TODO: Segmentierung aus gpt Laden
     dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
     for i in range(len(dataNames)):
