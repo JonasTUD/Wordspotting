@@ -2,7 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="331d816e-ac7c-4a09-a60e-5f860b0b3605" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2700270.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2710271.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2720272.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2730273.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2740274.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2750275.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2760276.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2770277.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2780278.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2790279.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3000300.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3010301.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3020302.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3030303.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3040304.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3050305.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3060306.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3070307.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3080308.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3090309.gtp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/codebook/codebook.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/codebook/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2700270.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2710271.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2720272.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2730273.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2740274.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2750275.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2760276.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2770277.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2780278.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2790279.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3000300.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3010301.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3020302.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3030303.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3040304.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3050305.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3060306.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3070307.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3080308.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3090309.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
@@ -14,7 +55,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Wordspotting$main.coverage" NAME="main Coverage Results" MODIFIED="1499186678679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Wordspotting$main.coverage" NAME="main Coverage Results" MODIFIED="1499247357764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -22,9 +63,11 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
-              <folding />
+            <state relative-caret-position="340">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,7 +141,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ressources" />
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sift" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -112,11 +159,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ressources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GT" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -329,6 +372,14 @@
       <option name="presentableId" value="Default" />
       <updated>1499176014632</updated>
     </task>
+    <task id="LOCAL-00001" summary="removed print">
+      <created>1499246293641</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1499246293641</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -339,7 +390,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="51" width="1366" height="717" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="1" y="52" width="1360" height="665" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -362,6 +413,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="removed print" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed print" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -371,15 +426,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="340">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
