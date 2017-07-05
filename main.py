@@ -3,14 +3,17 @@ import numpy as np
 
 def wordspotting():
     # TODO: Segmentierung aus gpt Laden
+    # dataNames: alle Namen der Dateien ohne Endung, kann also für GT & pages genutzt werden
     dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
     for i in range(len(dataNames)):
         obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
+        #TODO: alle Segmente aller Objekte speichern
         print obj
         for line in obj:
             print line
 
     # TODO: SIFT fuer ganzes Bild
+    # TODO: Vlfeat alle Deskriptoren für alle Bilder berechnen lassen
     step_size = 65
     cell_size = 15
     #frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)

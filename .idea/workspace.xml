@@ -1,56 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="331d816e-ac7c-4a09-a60e-5f860b0b3605" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/codebook/codebook.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2700270.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2710271.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2720272.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2730273.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2740274.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2750275.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2760276.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2770277.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2780278.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2790279.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3000300.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3010301.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3020302.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3030303.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3040304.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3050305.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3060306.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3070307.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3080308.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3090309.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2700270.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2710271.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2720272.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2730273.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2740274.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2750275.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2760276.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2770277.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2780278.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2790279.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3000300.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3010301.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3020302.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3030303.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3040304.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3050305.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3060306.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3070307.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3080308.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3090309.gtp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-full_dense-25_sift-5_descriptors.p" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-full_dense-45_sift-10_descriptors.p" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-full_dense-65_sift-15_descriptors.p" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-small_dense-15_sift-3_descriptors.p" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-small_dense-30_sift-6_descriptors.p" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-small_dense-45_sift-9_descriptors.p" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/codebook/readme.txt" />
+    <list default="true" id="331d816e-ac7c-4a09-a60e-5f860b0b3605" name="Default" comment="Deskriptor aus Aufgabe 6 eingefügt&#10;Resources Ordner mit Sift">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,8 +21,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="125">
+              <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -133,24 +86,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Wordspotting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Wordspotting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Wordspotting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sift" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -391,21 +326,39 @@
       <option name="project" value="LOCAL" />
       <updated>1499247396255</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Deskriptor aus Aufgabe 6 eingefügt&#10;Resources Ordner mit Sift">
+      <created>1499247479622</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1499247479622</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TodoView" selected-index="4">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32866043" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="1" y="52" width="1360" height="665" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -414,7 +367,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -427,7 +379,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="removed print" />
     <MESSAGE value="Deskriptor aus Aufgabe 6 eingefügt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deskriptor aus Aufgabe 6 eingefügt" />
+    <MESSAGE value="Deskriptor aus Aufgabe 6 eingefügt&#10;Resources Ordner mit Sift" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deskriptor aus Aufgabe 6 eingefügt&#10;Resources Ordner mit Sift" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -446,8 +399,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="125">
+          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
