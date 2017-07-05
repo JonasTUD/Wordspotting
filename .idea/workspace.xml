@@ -2,50 +2,55 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="331d816e-ac7c-4a09-a60e-5f860b0b3605" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2700270.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2710271.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2720272.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2730273.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2740274.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2750275.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2760276.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2770277.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2780278.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/2790279.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3000300.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3010301.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3020302.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3030303.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3040304.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3050305.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3060306.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3070307.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3080308.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/GT/3090309.gtp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/codebook/codebook.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/codebook/readme.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2700270.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2710271.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2720272.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2730273.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2740274.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2750275.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2760276.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2770277.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2780278.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/2790279.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3000300.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3010301.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3020302.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3030303.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3040304.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3050305.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3060306.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3070307.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3080308.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ressources/pages/3090309.png" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/codebook/codebook.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2700270.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2710271.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2720272.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2730273.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2740274.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2750275.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2760276.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2770277.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2780278.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/2790279.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3000300.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3010301.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3020302.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3030303.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3040304.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3050305.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3060306.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3070307.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3080308.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/pages/3090309.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2700270.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2710271.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2720272.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2730273.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2740274.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2750275.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2760276.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2770277.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2780278.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/2790279.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3000300.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3010301.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3020302.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3030303.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3040304.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3050305.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3060306.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3070307.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3080308.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/GT/3090309.gtp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-full_dense-25_sift-5_descriptors.p" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-full_dense-45_sift-10_descriptors.p" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-full_dense-65_sift-15_descriptors.p" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-small_dense-15_sift-3_descriptors.p" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-small_dense-30_sift-6_descriptors.p" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Sift/2700270-small_dense-45_sift-9_descriptors.p" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/codebook/readme.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,7 +68,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="317">
               <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
@@ -379,14 +384,20 @@
       <option name="project" value="LOCAL" />
       <updated>1499246293641</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Deskriptor aus Aufgabe 6 eingefügt">
+      <created>1499247396255</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1499247396255</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -415,7 +426,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="removed print" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed print" />
+    <MESSAGE value="Deskriptor aus Aufgabe 6 eingefügt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deskriptor aus Aufgabe 6 eingefügt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -434,7 +446,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="317">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
