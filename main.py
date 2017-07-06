@@ -2,8 +2,8 @@ import cPickle as pickle
 import numpy as np
 
 def wordspotting():
-    # TODO: Segmentierung aus gpt Laden
-    # dataNames: alle Namen der Dateien ohne Endung, kann also für GT & pages genutzt werden
+    # TODO: Segmentierung aus gpt laden
+    # dataNames: alle Namen der Dateien ohne Endung, kann also fuer GT & pages genutzt werden
     dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
     for i in range(len(dataNames)):
         obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
@@ -13,7 +13,7 @@ def wordspotting():
             print line
 
     # TODO: SIFT fuer ganzes Bild
-    # TODO: Vlfeat alle Deskriptoren für alle Bilder berechnen lassen
+    # TODO: Vlfeat alle Deskriptoren fuer alle Bilder berechnen lassen
     step_size = 65
     cell_size = 15
     #frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)
@@ -22,12 +22,14 @@ def wordspotting():
     frames = frames.T
     desc = np.array(desc.T, dtype=np.float)
 
-    # TODO: Visual Vocab mit Lloyd- Algorithmus
-    # TODO: Deskriptoren fuer Segment filtern (nach Deskriptor Ecke und Koodirnaten der Sift- Operatoren)
+    # TODO: Visual Vocab mit Lloyd-Algorithmus
+    # TODO: Deskriptoren fuer Segment filtern (nach Deskriptor Ecke und Koordinaten der Sift-Operatoren)
     # TODO: Spatial Pyramid fuer jedes Segment & Bag-of-Features
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
     # TODO: Singulaerwertzerlegung der Bag of Features
     # TODO: Distanz des Inputs durch Cosinusdistanz
     # TODO: Fehlerevaluierung
-wordspotting()
+    
+if __name__ == '__main__':
+    wordspotting()
