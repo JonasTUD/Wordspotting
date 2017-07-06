@@ -5,12 +5,18 @@ def wordspotting():
     # TODO: Segmentierung aus gpt laden
     # dataNames: alle Namen der Dateien ohne Endung, kann also fuer GT & pages genutzt werden
     dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
+    #docs{} ist ein Dictionary, das fuer jede Datei eine Liste mit Listen mit den Grenzen der einzelnen Segmente und den Texten in diesen
+    #Segmenten enthaelt
+    docs = {}
     for i in range(len(dataNames)):
         obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
         #TODO: alle Segmente aller Objekte speichern
-        print obj
+        segs = []   #Liste mit Segementgrenzen und -texten, die in docs{} geschrieben wird
         for line in obj:
-            print line
+            xmin, ymin, xmax, ymax, text = line.split()
+            segs.append(list((xmin, xmax, ymin, ymax, text)))
+        docs[dataNames[i]] = segs
+    print docs
 
     # TODO: SIFT fuer ganzes Bild
     # TODO: Vlfeat alle Deskriptoren fuer alle Bilder berechnen lassen
