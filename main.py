@@ -10,6 +10,7 @@ from scipy.spatial.distance import cdist
 from matplotlib.patches import Circle, Rectangle
 from matplotlib.lines import Line2D
 from gmpy import bincoef
+
 np.set_printoptions(threshold=np.nan)
 
 def wordspotting():
@@ -92,13 +93,11 @@ def wordspotting():
             framesifts = [] #SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
             for i in range(len(docf)):  #berechnete SIFT-Deskriporen des aktuellem Dokuments durchgehen
                 #Wenn Deskriptor im aktuellen Segment liegt, Deskriptor abspeichern
-
                 if seg[0] <= docf[i][0] and seg[1] >= docf[i][0] and seg[2] <= docf[i][1] and seg[3] >= docf[i][1]:
                     framesifts.append(docdescs[doc][i])
             ds.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
         docssifts[doc] = ds #fertige Liste mit Deskriptoren im Dokument ins Dictionary schreiben
     #es fehlen noch die uebrigen dokumente bis jetzt geht nur einss    
-
     #print docssifts
     
     cluster = {}    #Dictionary mit Zuordnungen der Deskriptoren zu Centroids
@@ -117,7 +116,6 @@ def wordspotting():
         hist = np.bincount(seg)
         bof[doc].append(hist) #Histogramm abspeichern
     print bof
-                        
             
     # TODO: Spatial Pyramid fuer jedes Segment & Bag-of-Features
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
@@ -128,3 +126,4 @@ def wordspotting():
     
 if __name__ == '__main__':
     wordspotting()
+
