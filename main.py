@@ -44,6 +44,7 @@ def wordspotting():
         docdescs[name] = []
     docframes['2700270'] = frames
     docdescs['2700270'] = desc
+
     """
     # TODO: Visual Vocab mit Lloyd-Algorithmus
     n_centroids = 40
@@ -81,23 +82,22 @@ def wordspotting():
     # TODO: Deskriptoren fuer Segment filtern (nach Deskriptor Ecke und Koordinaten der Sift-Operatoren)
     
     
-    docssifts = {}#hier sollen analog zu docs die zu jedem Segment gehoerenden SIFT-Deskriptoren geschrieben werden
+
+    docssifts = {} #hier sollen analog zu docs die zu jedem Segment gehoerenden SIFT-Deskriptoren geschrieben werden
     for doc in docs:    #jedes Dokument durchgehen
         docf = docframes[doc]   #Frames im aktuellen Dokument
-	print "hallo"+ str(doc)
-	#print docf
-	#if doc == '2700270':
-	#	return 0
         ds = [] #SIFT-Deskriptoren, die zu aktuellem Dokuent gehoeren
         for seg in docs[doc]:    #Segmentgrenzen in aktuellem Dokument durchgehen
             framesifts = [] #SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
             for i in range(len(docf)):  #berechnete SIFT-Deskriporen des aktuellem Dokuments durchgehen
                 #Wenn Deskriptor im aktuellen Segment liegt, Deskriptor abspeichern
+
                 if np.float64(seg[0]) <= docf[i][0] and np.float64(seg[1]) >= docf[i][0] and np.float64(seg[2]) <= docf[i][1] and np.float64(seg[3]) >= docf[i][1]:
                     framesifts.append(docdescs[doc][i])
             ds.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
         docssifts[doc] = ds #fertige Liste mit Deskriptoren im Dokument ins Dictionary schreiben
     #es fehlen noch die uebrigen dokumente bis jetzt geht nur einss    
+
     print docssifts
             
                         
