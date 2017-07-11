@@ -13,12 +13,7 @@ from matplotlib.lines import Line2D
 np.set_printoptions(threshold=np.nan)
 
 def wordspotting():
-    
-    input_file = open('resources/codebook/codebook.bin', 'r')
-    codebook = np.fromfile(input_file, dtype='float32')
-    codebook = np.reshape(codebook, (4096,128))
-    #print codebook
-    # TODO: Segmentierung aus gpt laden
+
     # dataNames: alle Namen der Dateien ohne Endung, kann also fuer GT & pages genutzt werden
     dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
     #docs{} ist ein Dictionary, das fuer jede Datei eine Liste mit Listen mit den Grenzen der einzelnen Segmente und den Texten in diesen
@@ -26,32 +21,25 @@ def wordspotting():
     docs = {}
     for i in range(len(dataNames)):
         obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
-        #TODO: alle Segmente aller Objekte speichern
         segs = []   #Liste mit Segementgrenzen und -texten, die in docs{} geschrieben wird
         for line in obj:
             xmin, ymin, xmax, ymax, text = line.split()
             segs.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
         docs[dataNames[i]] = segs
 
-    # TODO: SIFT fuer ganzes Bild
-    # TODO: Vlfeat alle Deskriptoren fuer alle Bilder berechnen lassen
-    step_size = 45
-    cell_size = 10
-    docframes = {}  #hier werden Frames fuer jedes Dokuemnt hineingeschrieben
-    docdescs = {}   #SIFTs fuer jedes Dokument
+    step_size = 25
+    cell_size = 5
+    pickle_densesift_fn = 'Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
+    frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
+    frames = frames.T
+    desc = np.array(desc.T, dtype=np.float)
 
-    for name in dataNames:
-     	image = Image.open("resources/pages/"+name+".png")
-     	im_arr = np.asarray(image,dtype='float32')
-     	frames,desc = vlfeat.vl_dsift(im_arr,step=step_size,size = cell_size)
-     	frames = frames.T
-     	desc = np.array(desc.T,dtype=np.float)
-     	docframes[name]=frames
-     	docdescs[name]=desc
-        
-    n_centroids = 400
+    # Optional: SIFT nach Vorkommen in Segmenten filtern
+    n_centroids = 4096
     _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
 
+
+    """""
     document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
     image = Image.open(document_image_filename)
     im_arr = np.asarray(image, dtype='float32')
@@ -79,13 +67,12 @@ def wordspotting():
         ax.add_patch(rect)
     
     plt.show()
+    """""
 
-    pickle.dump(docdescs, open( "docdescs.p", "wb" ))
 
     # TODO: Deskriptoren fuer Segment filtern (nach Deskriptor Ecke und Koordinaten der Sift-Operatoren)
-    
-    
-
+    # uebernimmt: TD1234
+    """""
     docssifts = {} #hier sollen analog zu docs die zu jedem Segment gehoerenden SIFT-Deskriptoren geschrieben werden
     for doc in docs:    #jedes Dokument durchgehen
         docf = docframes[doc]   #Frames im aktuellen Dokument
@@ -107,21 +94,33 @@ def wordspotting():
     for seg in docssifts[doc]:  #fuer jedes Segment im Dokument Zuordnung berechnen
         _, labels = kmeans2(seg, n_centroids, iter=20, minit='points')
         cluster[doc].append(labels) #Zuordnung abspeichern
-    
-    bof = {}    #Dictionary mit Bag-of-Features-Repraesentationen fuer ganze Segmente
-    doc = '2700270'
-    bof[doc] = []
-    for seg in cluster[doc]:    #Histogramm, d.h. BoF-Repraesentation, fuer jedes Segment berechnen
-        hist = np.bincount(seg)
-        bof[doc].append(hist) #Histogramm abspeichern
-            
+    """""
+
+    # Rueckgabe: Sifts: Liste von np.array mit Desc
+
     # TODO: Spatial Pyramid fuer jedes Segment & Bag-of-Features
+    # uebernimmt: blub
+    # Histogramm für jedes Segment mit bincount und bins=n_centroid
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
-    # TODO: Singulaerwertzerlegung der Bag of Features
+
+    # Rueckgabe: Matrix: Anzahl Segmente X (4096*3)
+
     # TODO: Distanz des Inputs durch Cosinusdistanz
+    # pdist, argsort,
+    # uebernimmt: blub
+
+
+    # boolsche matrix/schleifen um Vorkommen zu identifizieren
+    # uebernimmt: Jonas
+
+    # TODO: Matrix mit Anzahl der Wortvorkommen
+    # uebernimmt: TD
+
     # TODO: Fehlerevaluierung
-    
+    # uebernimmt: recharge
+
+
 if __name__ == '__main__':
     wordspotting()
 
