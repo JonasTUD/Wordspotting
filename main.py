@@ -51,53 +51,7 @@ def wordspotting():
         
     n_centroids = 400
     _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
-    document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
-    image = Image.open(document_image_filename)
-    im_arr = np.asarray(image, dtype='float32')
-    draw_descriptor_cells = True
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    ax.imshow(im_arr, cmap=cm.get_cmap('Greys_r'))
-    ax.hold(True)
-    ax.autoscale(enable=False)
-    colormap = cm.get_cmap('jet')
-    desc_len = cell_size * 4
-    for (x, y), label in zip(frames, labels):
-        color = colormap(label / float(n_centroids))
-        circle = Circle((x, y), radius=1, fc=color, ec=color, alpha=1)
-        rect = Rectangle((x - desc_len / 2, y - desc_len / 2), desc_len, desc_len, alpha=0.08, lw=1)
-        ax.add_patch(circle)
-        if draw_descriptor_cells:
-            for p_factor in [0.25, 0.5, 0.75]:
-                offset_dyn = desc_len * (0.5 - p_factor)
-                offset_stat = desc_len * 0.5
-                line_h = Line2D((x - offset_stat, x + offset_stat), (y - offset_dyn, y - offset_dyn), alpha=0.08, lw=1)
-                line_v = Line2D((x - offset_dyn , x - offset_dyn), (y - offset_stat, y + offset_stat), alpha=0.08, lw=1)
-                ax.add_line(line_h)
-                ax.add_line(line_v)
-        ax.add_patch(rect)
-    
-    plt.show()
-	  
-    #frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)
-    #pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
-    #frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
-    #frames = frames.T
-    #desc = np.array(desc.T, dtype=np.float)
-    #for name in dataNames:
-    #    docframes[name] = []
-    #    docdescs[name] = []
-    #docframes['2700270'] = frames
-    #docdescs['2700270'] = desc
-    #print docdescs
-    pickle.dump(docdescs, open( "docdescs.p", "wb" ))
-    return 0
-    """
-    # TODO: Visual Vocab mit Lloyd-Algorithmus
-    n_centroids = 40
-    _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
 
-    #visualisierung
     document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
     image = Image.open(document_image_filename)
     im_arr = np.asarray(image, dtype='float32')
@@ -125,7 +79,9 @@ def wordspotting():
         ax.add_patch(rect)
     
     plt.show()
-    """
+
+    pickle.dump(docdescs, open( "docdescs.p", "wb" ))
+
     # TODO: Deskriptoren fuer Segment filtern (nach Deskriptor Ecke und Koordinaten der Sift-Operatoren)
     
     
