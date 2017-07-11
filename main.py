@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import PIL.Image as Image
 import matplotlib
+import vlfeat
 from scipy.cluster.vq import kmeans2
 from scipy.spatial.distance import cdist
 from matplotlib.patches import Circle, Rectangle
@@ -36,6 +37,17 @@ def wordspotting():
     cell_size = 5
     docframes = {}  #hier werden Frames fuer jedes Dokuemnt hineingeschrieben
     docdescs = {}   #SIFTs fuer jedes Dokument
+    for name in dataNames:
+	image = Image.open("resources/pages/"+name+".png")
+	im_arr = np.asarray(image,dtype='float32')
+	frames,desc = vlfeat.vl_dsift(im_arr,step=step_size,size = cell_size)
+	frames = frames.T
+	desc = np.array(desc.T,dtype=np.float)
+	docframes[name]=frames
+	docdesc[name]=desc
+	plt.imshow(im_arr,cmap.get_cmap('Greys_r'))
+	plt.show()	  
+
     #frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)
     pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
     frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
@@ -98,8 +110,8 @@ def wordspotting():
             ds.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
         docssifts[doc] = ds #fertige Liste mit Deskriptoren im Dokument ins Dictionary schreiben
     #es fehlen noch die uebrigen dokumente bis jetzt geht nur einss    
-    #print docssifts
-    
+    print docssifts
+    return 0
     cluster = {}    #Dictionary mit Zuordnungen der Deskriptoren zu Centroids
     n_centroids = 3 #Anzahl Centroids
     doc = '2700270' #erstmal nur das eine Dokument
