@@ -10,20 +10,19 @@ from scipy.cluster.vq import kmeans2
 from scipy.spatial.distance import cdist
 from matplotlib.patches import Circle, Rectangle
 from matplotlib.lines import Line2D
-from gmpy import bincoef
+#from gmpy import bincoef
 
 np.set_printoptions(threshold=np.nan)
 
 def wordspotting():
-    # TODO: Segmentierung aus gpt laden
     # dataNames: alle Namen der Dateien ohne Endung, kann also fuer GT & pages genutzt werden
-    dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
     #docs{} ist ein Dictionary, das fuer jede Datei eine Liste mit Listen mit den Grenzen der einzelnen Segmente und den Texten in diesen
     #Segmenten enthaelt
+
+    dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
     docs = {}
     for i in range(len(dataNames)):
         obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
-        #TODO: alle Segmente aller Objekte speichern
         segs = []   #Liste mit Segementgrenzen und -texten, die in docs{} geschrieben wird
         for line in obj:
             xmin, ymin, xmax, ymax, text = line.split()
@@ -37,18 +36,18 @@ def wordspotting():
     cell_size = 5
     docframes = {}  #hier werden Frames fuer jedes Dokuemnt hineingeschrieben
     docdescs = {}   #SIFTs fuer jedes Dokument
+
     """
     for name in dataNames:
-	image = Image.open("resources/pages/"+name+".png")
-	im_arr = np.asarray(image,dtype='float32')
-	frames,desc = vlfeat.vl_dsift(im_arr,step=step_size,size = cell_size)
-	frames = frames.T
-	desc = np.array(desc.T,dtype=np.float)
-	docframes[name]=frames
-	docdesc[name]=desc
-	plt.imshow(im_arr,cmap.get_cmap('Greys_r'))
-	plt.show()	  
+        image = Image.open("resources/pages/"+name+".png")
+        im_arr = np.asarray(image,dtype='float32')
+        frames,desc = vlfeat.vl_dsift(im_arr,step=step_size,size = cell_size)
+        frames = frames.T
+        desc = np.array(desc.T,dtype=np.float)
+        docframes[name]= frames
+        docdescs[name]=desc
     """
+
     #frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)
     pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
     frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
@@ -64,36 +63,8 @@ def wordspotting():
     # TODO: Visual Vocab mit Lloyd-Algorithmus
     n_centroids = 40
     _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
-
-    #visualisierung
-    document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
-    image = Image.open(document_image_filename)
-    im_arr = np.asarray(image, dtype='float32')
-    draw_descriptor_cells = True
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    ax.imshow(im_arr, cmap=cm.get_cmap('Greys_r'))
-    ax.hold(True)
-    ax.autoscale(enable=False)
-    colormap = cm.get_cmap('jet')
-    desc_len = cell_size * 4
-    for (x, y), label in zip(frames, labels):
-        color = colormap(label / float(n_centroids))
-        circle = Circle((x, y), radius=1, fc=color, ec=color, alpha=1)
-        rect = Rectangle((x - desc_len / 2, y - desc_len / 2), desc_len, desc_len, alpha=0.08, lw=1)
-        ax.add_patch(circle)
-        if draw_descriptor_cells:
-            for p_factor in [0.25, 0.5, 0.75]:
-                offset_dyn = desc_len * (0.5 - p_factor)
-                offset_stat = desc_len * 0.5
-                line_h = Line2D((x - offset_stat, x + offset_stat), (y - offset_dyn, y - offset_dyn), alpha=0.08, lw=1)
-                line_v = Line2D((x - offset_dyn , x - offset_dyn), (y - offset_stat, y + offset_stat), alpha=0.08, lw=1)
-                ax.add_line(line_h)
-                ax.add_line(line_v)
-        ax.add_patch(rect)
-    
-    plt.show()
     """
+
     # TODO: Deskriptoren fuer Segment filtern (nach Deskriptor Ecke und Koordinaten der Sift-Operatoren)
     
     
