@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import PIL.Image as Image
 import matplotlib
-import vlfeat
+#import vlfeat
 from scipy.cluster.vq import kmeans2
 from scipy.spatial.distance import cdist
 from matplotlib.patches import Circle, Rectangle
@@ -37,6 +37,7 @@ def wordspotting():
     cell_size = 5
     docframes = {}  #hier werden Frames fuer jedes Dokuemnt hineingeschrieben
     docdescs = {}   #SIFTs fuer jedes Dokument
+    """
     for name in dataNames:
 	image = Image.open("resources/pages/"+name+".png")
 	im_arr = np.asarray(image,dtype='float32')
@@ -47,7 +48,7 @@ def wordspotting():
 	docdesc[name]=desc
 	plt.imshow(im_arr,cmap.get_cmap('Greys_r'))
 	plt.show()	  
-
+    """
     #frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)
     pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
     frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
