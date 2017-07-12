@@ -67,29 +67,34 @@ def wordspotting():
     """""
 
     sifts = []
+    siftslinks = []
+    siftsrechts = []
     for seg in doc:    #Segmentgrenzen in Dokument durchgehen
         framesifts = [] #SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
+        framesiftslinks = []
+        framesiftsrechts = []
         for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
             #Wenn Deskriptor im aktuellen Segment liegt, Deskriptor abspeichern
             if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
                 framesifts.append(desc[i])
+            #fuer linken Teil
+            if seg[0] <= frames[i][0] and (seg[0]+((seg[1]-seg[0])/2)) >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesiftslinks.append(desc[i])
+            #fuer rechten Teil   
+            if (seg[0]+((seg[1]-seg[0])/2)) <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesiftsrechts.append(desc[i])
         sifts.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
+        siftslinks.append(framesiftslinks) 
+        siftsrechts.append(framesiftsrechts) 
+    #print sifts
+    #print siftslinks
+    #print siftsrechts
+    #in sifts[] stehen jetzt an i-ter Stelle die Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
     
-    print sifts
-    #in sifts[] stehen jetzt an i-ter Stelle die Deskriptoren, die zum i-ten Segement im Dokument gehoeren
+    #analog stehen in siftslinks und siftsrechts die bei der Berechnung der Spatial Pyramid notwendigen
+    #Deskriptoren im linken und rechten Segmentausschnitt
     
-    #===========================================================================
-    # 
-    # cluster = {}    #Dictionary mit Zuordnungen der Deskriptoren zu Centroids
-    # n_centroids = 3 #Anzahl Centroids
-    # doc = '2700270' #erstmal nur das eine Dokument
-    # cluster[doc] = []
-    # for seg in docssifts[doc]:  #fuer jedes Segment im Dokument Zuordnung berechnen
-    #     _, labels = kmeans2(seg, n_centroids, iter=20, minit='points')
-    #     cluster[doc].append(labels) #Zuordnung abspeichern
-    #===========================================================================
-
-    # Rueckgabe: Sifts: Liste von np.array mit Desc
+    
 
     # TODO: Spatial Pyramid fuer jedes Segment & Bag-of-Features
     # uebernimmt: blub
