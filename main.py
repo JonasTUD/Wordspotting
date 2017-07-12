@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import PIL.Image as Image
 import matplotlib
-import vlfeat
+#import vlfeat
 from scipy.cluster.vq import kmeans2
 from scipy.spatial.distance import cdist
 from matplotlib.patches import Circle, Rectangle
@@ -16,27 +16,24 @@ def wordspotting():
 
     # dataNames: alle Namen der Dateien ohne Endung, kann also fuer GT & pages genutzt werden
     dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
-    #docs{} ist ein Dictionary, das fuer jede Datei eine Liste mit Listen mit den Grenzen der einzelnen Segmente und den Texten in diesen
-    #Segmenten enthaelt
-    docs = {}
-    for i in range(len(dataNames)):
-        obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
-        segs = []   #Liste mit Segementgrenzen und -texten, die in docs{} geschrieben wird
-        for line in obj:
-            xmin, ymin, xmax, ymax, text = line.split()
-            segs.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
-        docs[dataNames[i]] = segs
+    
+    doc = []    #hier stehen jetzt fuer jedes Segment die Informationen in der Form (xmin, xmax, ymin, ymax, text)
+    obj = open("resources/GT/2700270.gtp", "r")
+    segs = []   #Liste mit Segementgrenzen und -texten
+    for line in obj:
+        xmin, ymin, xmax, ymax, text = line.split()
+        doc.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
 
     step_size = 25
     cell_size = 5
-    pickle_densesift_fn = 'Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
+    pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
     frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
     frames = frames.T
     desc = np.array(desc.T, dtype=np.float)
 
     # Optional: SIFT nach Vorkommen in Segmenten filtern
-    n_centroids = 4096
-    _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
+    #n_centroids = 4096
+    #_,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
 
 
     """""
@@ -69,38 +66,34 @@ def wordspotting():
     plt.show()
     """""
 
-
-    # TODO: Deskriptoren fuer Segment filtern (nach Deskriptor Ecke und Koordinaten der Sift-Operatoren)
-    # uebernimmt: TD1234
-    """""
-    docssifts = {} #hier sollen analog zu docs die zu jedem Segment gehoerenden SIFT-Deskriptoren geschrieben werden
-    for doc in docs:    #jedes Dokument durchgehen
-        docf = docframes[doc]   #Frames im aktuellen Dokument
-        ds = [] #SIFT-Deskriptoren, die zu aktuellem Dokuent gehoeren
-        for seg in docs[doc]:    #Segmentgrenzen in aktuellem Dokument durchgehen
-            framesifts = [] #SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
-            for i in range(len(docf)):  #berechnete SIFT-Deskriporen des aktuellem Dokuments durchgehen
-                #Wenn Deskriptor im aktuellen Segment liegt, Deskriptor abspeichern
-                if seg[0] <= docf[i][0] and seg[1] >= docf[i][0] and seg[2] <= docf[i][1] and seg[3] >= docf[i][1]:
-                    framesifts.append(docdescs[doc][i])
-            ds.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
-        docssifts[doc] = ds #fertige Liste mit Deskriptoren im Dokument ins Dictionary schreiben
-    #es fehlen noch die uebrigen dokumente bis jetzt geht nur einss    
-    #print docssifts
-    cluster = {}    #Dictionary mit Zuordnungen der Deskriptoren zu Centroids
-    n_centroids = 3 #Anzahl Centroids
-    doc = '2700270' #erstmal nur das eine Dokument
-    cluster[doc] = []
-    for seg in docssifts[doc]:  #fuer jedes Segment im Dokument Zuordnung berechnen
-        _, labels = kmeans2(seg, n_centroids, iter=20, minit='points')
-        cluster[doc].append(labels) #Zuordnung abspeichern
-    """""
+    sifts = []
+    for seg in doc:    #Segmentgrenzen in Dokument durchgehen
+        framesifts = [] #SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
+        for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
+            #Wenn Deskriptor im aktuellen Segment liegt, Deskriptor abspeichern
+            if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesifts.append(desc[i])
+        sifts.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
+    
+    print sifts
+    #in sifts[] stehen jetzt an i-ter Stelle die Deskriptoren, die zum i-ten Segement im Dokument gehoeren
+    
+    #===========================================================================
+    # 
+    # cluster = {}    #Dictionary mit Zuordnungen der Deskriptoren zu Centroids
+    # n_centroids = 3 #Anzahl Centroids
+    # doc = '2700270' #erstmal nur das eine Dokument
+    # cluster[doc] = []
+    # for seg in docssifts[doc]:  #fuer jedes Segment im Dokument Zuordnung berechnen
+    #     _, labels = kmeans2(seg, n_centroids, iter=20, minit='points')
+    #     cluster[doc].append(labels) #Zuordnung abspeichern
+    #===========================================================================
 
     # Rueckgabe: Sifts: Liste von np.array mit Desc
 
     # TODO: Spatial Pyramid fuer jedes Segment & Bag-of-Features
     # uebernimmt: blub
-    # Histogramm für jedes Segment mit bincount und bins=n_centroid
+    # Histogramm fuer jedes Segment mit bincount und bins=n_centroid
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
 
@@ -114,8 +107,16 @@ def wordspotting():
     # boolsche matrix/schleifen um Vorkommen zu identifizieren
     # uebernimmt: Jonas
 
-    # TODO: Matrix mit Anzahl der Wortvorkommen
-    # uebernimmt: TD
+    
+    wordcount=[]
+    for i in range(len(doc)):
+        counter=0
+        for j in range(len(doc)):
+            if doc[i][4] == doc[j][4]:
+                counter = counter + 1
+        wordcount.append(counter)
+    #print wordcount
+    #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
 
     # TODO: Fehlerevaluierung
     # uebernimmt: recharge
@@ -123,4 +124,3 @@ def wordspotting():
 
 if __name__ == '__main__':
     wordspotting()
-
