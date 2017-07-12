@@ -12,6 +12,7 @@ from matplotlib.lines import Line2D
 
 np.set_printoptions(threshold=np.nan)
 
+
 def wordspotting():
 
     # dataNames: alle Namen der Dateien ohne Endung, kann also fuer GT & pages genutzt werden
@@ -30,10 +31,12 @@ def wordspotting():
     frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
     frames = frames.T
     desc = np.array(desc.T, dtype=np.float)
-
     # Optional: SIFT nach Vorkommen in Segmenten filtern
-    #n_centroids = 4096
+    n_centroids = 4096
     #_,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
+    input_file = open('resources/codebook/codebook.bin', 'r') 
+    codebook = np.fromfile(input_file, dtype='float32') 
+    codebook = np.reshape(codebook, (4096,128))
 
 
     """""
@@ -81,7 +84,7 @@ def wordspotting():
             if seg[0] <= frames[i][0] and (seg[0]+((seg[1]-seg[0])/2)) >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
                 framesiftslinks.append(desc[i])
             #fuer rechten Teil   
-            if (seg[0]+((seg[1]-seg[0])/2)) <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+            if (seg[0]+((seg[1]-seg[0])/2)) < frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
                 framesiftsrechts.append(desc[i])
         sifts.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
         siftslinks.append(framesiftslinks) 
@@ -101,8 +104,24 @@ def wordspotting():
     # Histogramm fuer jedes Segment mit bincount und bins=n_centroid
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
-
-    # Rueckgabe: Matrix: Anzahl Segmente X (4096*3)
+    print type(sifts[0][0])
+    print np.shape(sifts)
+    print np.shape(sifts[1])
+    print np.shape(sifts[0][0])
+    for seg in sifts: #dauert sehr lange
+	npsifts = []
+        for desk in seg:
+        	npsifts.append(indexinCodebuch(desk,codebook))
+        
+        print np.bincount(npsifts,minlength=n_centroids)
+    #Das codebook scheint die falschen deskriptoren zu enthalten
+    #die deskriptoren aus sifts passen nicht zu denen im codebook
+    """
+    npsiftslinks = np.asarray(siftslinks)
+    npsiftsrechts = np.asarray(siftsrechts)
+    np.shape(np.bincount(npsiftslinks,minlength=n_centroids))
+    np.shape(np.bincount(npsiftsrechts,minlength=n_centroids))
+    """ # Rueckgabe: Matrix: Anzahl Segmente X (4096*3)
 
     # TODO: Distanz des Inputs durch Cosinusdistanz
     # pdist, argsort,
@@ -125,6 +144,14 @@ def wordspotting():
 
     # TODO: Fehlerevaluierung
     # uebernimmt: recharge
+#bekommt einen sift deskriptor (1 dimensionales ndarray mit 128 eintraegen)
+#und gibt den index dieses deskriptors im codebuch zurueck
+#wenn es den deskriptor nicht gibt wird 4095 zurueckgegeben
+def indexinCodebuch( desk,codebook):    
+    for i in range(4096):
+	if np.array_equal(codebook[i],desk):
+		return i
+    return 4095
 
 
 if __name__ == '__main__':
