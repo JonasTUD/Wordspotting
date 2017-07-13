@@ -9,8 +9,9 @@ from scipy.cluster.vq import kmeans2
 from scipy.spatial.distance import cdist
 from matplotlib.patches import Circle, Rectangle
 from matplotlib.lines import Line2D
+from numpy import bincount
 
-np.set_printoptions(threshold=np.nan)
+#np.set_printoptions(threshold=np.nan)
 
 
 def wordspotting():
@@ -33,11 +34,7 @@ def wordspotting():
     desc = np.array(desc.T, dtype=np.float)
     # Optional: SIFT nach Vorkommen in Segmenten filtern
     n_centroids = 4096
-    #_,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
-    input_file = open('resources/codebook/codebook.bin', 'r') 
-    codebook = np.fromfile(input_file, dtype='float32') 
-    codebook = np.reshape(codebook, (4096,128))
-
+    _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
 
     """""
     document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
@@ -69,32 +66,32 @@ def wordspotting():
     plt.show()
     """""
 
-    sifts = []
-    siftslinks = []
-    siftsrechts = []
+    siftsind = []
+    siftslinksind = []
+    siftsrechtsind = []
     for seg in doc:    #Segmentgrenzen in Dokument durchgehen
-        framesifts = [] #SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
+        framesifts = [] #Indizes der SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
         framesiftslinks = []
         framesiftsrechts = []
         for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
-            #Wenn Deskriptor im aktuellen Segment liegt, Deskriptor abspeichern
+            #Wenn Deskriptor im aktuellen Segment liegt, Index des Deskriptors abspeichern
             if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
-                framesifts.append(desc[i])
+                framesifts.append(i)
             #fuer linken Teil
             if seg[0] <= frames[i][0] and (seg[0]+((seg[1]-seg[0])/2)) >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
-                framesiftslinks.append(desc[i])
+                framesiftslinks.append(i)
             #fuer rechten Teil   
             if (seg[0]+((seg[1]-seg[0])/2)) < frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
-                framesiftsrechts.append(desc[i])
-        sifts.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
-        siftslinks.append(framesiftslinks) 
-        siftsrechts.append(framesiftsrechts) 
-    #print sifts
-    #print siftslinks
-    #print siftsrechts
-    #in sifts[] stehen jetzt an i-ter Stelle die Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
+                framesiftsrechts.append(i)
+        siftsind.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
+        siftslinksind.append(framesiftslinks) 
+        siftsrechtsind.append(framesiftsrechts) 
+    print siftsind
+    print siftslinksind
+    print siftsrechtsind
+    #in sifts[] stehen jetzt an i-ter Stelle die Indizes der Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
     
-    #analog stehen in siftslinks und siftsrechts die bei der Berechnung der Spatial Pyramid notwendigen
+    #analog stehen in siftslinks und siftsrechts die bei der Berechnung der Spatial Pyramid notwendigen Indizes der
     #Deskriptoren im linken und rechten Segmentausschnitt
     
     
@@ -104,16 +101,43 @@ def wordspotting():
     # Histogramm fuer jedes Segment mit bincount und bins=n_centroid
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
-    print type(sifts[0][0])
-    print np.shape(sifts)
-    print np.shape(sifts[1])
-    print np.shape(sifts[0][0])
-    for seg in sifts: #dauert sehr lange
-	npsifts = []
-        for desk in seg:
-        	npsifts.append(indexinCodebuch(desk,codebook))
-        
-        print np.bincount(npsifts,minlength=n_centroids)
+ 
+    arr = []
+    hist1 = []           #Histogramm fuer gesamte Segmente berechnen
+    for seg in siftsind:
+        segarr =[]
+        for s in seg:
+            segarr.append(labels[s])
+        arr.append(segarr)
+        hist1.append(np.bincount(np.array(segarr), minlength = n_centroids))
+    
+    arr = []
+    hist2 = []           #Histogramm fuer linken Segmentteil berechnen
+    for seg in siftsind:
+        segarr =[]
+        for s in seg:
+            segarr.append(labels[s])
+        arr.append(segarr)
+        hist2.append(np.bincount(np.array(segarr), minlength = n_centroids))
+    
+    arr = []
+    hist3 = []           #Histogramm fuer rechten Segmentteil berechnen
+    for seg in siftsind:
+        segarr =[]
+        for s in seg:
+            segarr.append(labels[s])
+        arr.append(segarr)
+        hist3.append(np.bincount(np.array(segarr), minlength = n_centroids))
+    
+    bof = []
+    print type(hist1[0])    
+    for i in range(len(hist1)): #Histogramme zur BoF-Repraesentation zusammenfuehren
+        bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
+    
+    bof = np.array(bof)
+    print bof
+    
+    
     #Das codebook scheint die falschen deskriptoren zu enthalten
     #die deskriptoren aus sifts passen nicht zu denen im codebook
     """
@@ -158,9 +182,9 @@ def wordspotting():
 #wenn es den deskriptor nicht gibt wird 4095 zurueckgegeben
 def indexinCodebuch( desk,codebook):    
     for i in range(4096):
-	if np.array_equal(codebook[i],desk):
-		return i
-    return 4095
+        if np.array_equal(codebook[i],desk):
+            return i
+        return 4095
 
 
 if __name__ == '__main__':
