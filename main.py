@@ -121,12 +121,21 @@ def wordspotting():
     npsiftsrechts = np.asarray(siftsrechts)
     np.shape(np.bincount(npsiftslinks,minlength=n_centroids))
     np.shape(np.bincount(npsiftsrechts,minlength=n_centroids))
-    """ # Rueckgabe: Matrix: Anzahl Segmente X (4096*3)
+    """
+    # Rueckgabe: Matrix: Anzahl Segmente X (4096*3)
+    # Bitte Rueckgabe bof nennen!
+
+    bof = [[]]
 
     # TODO: Distanz des Inputs durch Cosinusdistanz
     # pdist, argsort,
     # uebernimmt: blub
 
+    # Frage: Warum pdist? So wuerden wir ja jedes Vorkommen von einem Centroiden mit dem im anderen Segment vergleichen und nur die am naechsten zueinander stehenden Centroiden finden
+    # Glaube daher cdist ist richtig
+
+    bofDist = cdist(bof,bof, 'cosine')
+    bofDistArgsort = (np.argsort(bofDist))[:,1:]
 
     # boolsche matrix/schleifen um Vorkommen zu identifizieren
     # uebernimmt: Jonas
