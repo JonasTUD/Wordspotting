@@ -6,12 +6,13 @@ import PIL.Image as Image
 import matplotlib
 #import vlfeat
 from scipy.cluster.vq import kmeans2
-from scipy.spatial.distance import cdist
+from scipy.spatial.distance import cdist, pdist, squareform
 from matplotlib.patches import Circle, Rectangle
 from matplotlib.lines import Line2D
-from numpy import bincount
+from numpy import bincount, argsort
+import scipy.sparse
 
-#np.set_printoptions(threshold=np.nan)
+np.set_printoptions(threshold=np.nan)
 
 
 def wordspotting():
@@ -25,7 +26,6 @@ def wordspotting():
     for line in obj:
         xmin, ymin, xmax, ymax, text = line.split()
         doc.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
-
     step_size = 25
     cell_size = 5
     pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
@@ -33,8 +33,8 @@ def wordspotting():
     frames = frames.T
     desc = np.array(desc.T, dtype=np.float)
     # Optional: SIFT nach Vorkommen in Segmenten filtern
-    n_centroids = 4096
-    _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
+    n_centroids = 256
+    _,labels = kmeans2(desc,n_centroids,iter =40, minit='points')
 
     """""
     document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
@@ -102,40 +102,68 @@ def wordspotting():
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
  
-    arr = []
     hist1 = []           #Histogramm fuer gesamte Segmente berechnen
     for seg in siftsind:
         segarr =[]
         for s in seg:
             segarr.append(labels[s])
-        arr.append(segarr)
         hist1.append(np.bincount(np.array(segarr), minlength = n_centroids))
     
-    arr = []
     hist2 = []           #Histogramm fuer linken Segmentteil berechnen
-    for seg in siftsind:
+    for seg in siftslinksind:
         segarr =[]
         for s in seg:
             segarr.append(labels[s])
-        arr.append(segarr)
         hist2.append(np.bincount(np.array(segarr), minlength = n_centroids))
     
-    arr = []
     hist3 = []           #Histogramm fuer rechten Segmentteil berechnen
-    for seg in siftsind:
+    for seg in siftsrechtsind:
         segarr =[]
         for s in seg:
             segarr.append(labels[s])
-        arr.append(segarr)
         hist3.append(np.bincount(np.array(segarr), minlength = n_centroids))
     
     bof = []
-    print type(hist1[0])    
+    #print type(hist1[0])    
     for i in range(len(hist1)): #Histogramme zur BoF-Repraesentation zusammenfuehren
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
     
     bof = np.array(bof)
-    print bof
+    #print bof
+    #print bof[21]
+    #print bof[22]
+    #print bof.shape
+    #print type(bof[0,0])
+    
+    dist = pdist(bof, 'euclidean')
+    print dist.shape
+    dist = squareform(dist)
+    dist = argsort(dist)
+    print dist
+    
+    wordcount=[]
+    for i in range(len(doc)):
+        counter=0
+        for j in range(len(doc)):
+            if doc[i][4] == doc[j][4]:
+                counter = counter + 1
+        wordcount.append(counter)
+    #print wordcount
+    #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
+    
+    for word in range(len(doc)):
+        if wordcount[word] != 1:
+            a = wordcount[word]
+            count = 0
+            print 'Die Woerter der' , wordcount[word]-1, 'Segmente, die als dem Segment mit dem Wort "', doc[word][4], '" am aehnlichsten erkannt wurden: '
+            for i in range(1, wordcount[word]):
+                print doc[dist[word][i]][4]
+                if doc[dist[word][i]][4] == doc[word][4]:
+                    count = count+1
+            error = (float(count)/a)*100
+            print 'Das ergibt eine Erkennungsrate von', error, '%'
+            print
+            
     
     
     #Das codebook scheint die falschen deskriptoren zu enthalten
@@ -149,7 +177,7 @@ def wordspotting():
     # Rueckgabe: Matrix: Anzahl Segmente X (4096*3)
     # Bitte Rueckgabe bof nennen!
 
-    bof = [[]]
+    #bof = [[]]
 
     # TODO: Distanz des Inputs durch Cosinusdistanz
     # pdist, argsort,
@@ -158,34 +186,17 @@ def wordspotting():
     # Frage: Warum pdist? So wuerden wir ja jedes Vorkommen von einem Centroiden mit dem im anderen Segment vergleichen und nur die am naechsten zueinander stehenden Centroiden finden
     # Glaube daher cdist ist richtig
 
-    bofDist = cdist(bof,bof, 'cosine')
-    bofDistArgsort = (np.argsort(bofDist))[:,1:]
+    #bofDist = cdist(bof,bof, 'cosine')
+    #bofDistArgsort = (np.argsort(bofDist))[:,1:]
 
     # boolsche matrix/schleifen um Vorkommen zu identifizieren
     # uebernimmt: Jonas
 
     
-    wordcount=[]
-    for i in range(len(doc)):
-        counter=0
-        for j in range(len(doc)):
-            if doc[i][4] == doc[j][4]:
-                counter = counter + 1
-        wordcount.append(counter)
-    #print wordcount
-    #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
+    
 
     # TODO: Fehlerevaluierung
     # uebernimmt: recharge
-#bekommt einen sift deskriptor (1 dimensionales ndarray mit 128 eintraegen)
-#und gibt den index dieses deskriptors im codebuch zurueck
-#wenn es den deskriptor nicht gibt wird 4095 zurueckgegeben
-def indexinCodebuch( desk,codebook):    
-    for i in range(4096):
-        if np.array_equal(codebook[i],desk):
-            return i
-        return 4095
-
 
 if __name__ == '__main__':
     wordspotting()
