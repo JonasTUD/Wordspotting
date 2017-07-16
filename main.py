@@ -26,14 +26,14 @@ def wordspotting():
     for line in obj:
         xmin, ymin, xmax, ymax, text = line.split()
         doc.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
-    step_size = 25
-    cell_size = 5
+    step_size =25
+    cell_size =5
     pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
     frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
     frames = frames.T
     desc = np.array(desc.T, dtype=np.float)
     # Optional: SIFT nach Vorkommen in Segmenten filtern
-    n_centroids = 256
+    n_centroids = 2048
     _,labels = kmeans2(desc,n_centroids,iter =40, minit='points')
 
     """""
@@ -148,7 +148,7 @@ def wordspotting():
             if doc[i][4] == doc[j][4]:
                 counter = counter + 1
         wordcount.append(counter)
-    #print wordcount
+    print wordcount
     #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
     
     for word in range(len(doc)):
@@ -161,12 +161,47 @@ def wordspotting():
                 similarWords += str(doc[dist[word][i]][4]) + ", "
                 if doc[dist[word][i]][4] == doc[word][4]:
                     count = count+1
+
             error = (float(count)/a)*100
-            print similarWords
+	    print similarWords
             print 'Das ergibt eine Erkennungsrate von', error, '%'
             print
+            if word % 100 == 0:
+		document_image_filename = 'resources/pages/2700270.png'
+    		image = Image.open(document_image_filename)
+    		im_arr = np.asarray(image, dtype='float32')
+		#print im_arr
+		queryimg_arr = im_arr[doc[word][2]:doc[word][3],doc[word][0]:doc[word][1]]
+    		for i in range(1, wordcount[word]):
+			similarwordimg_arr = im_arr[doc[dist[word][i]][2]:doc[dist[word][i]][3],doc[dist[word][i]][0]:doc[dist[word][i]][1]]
+			a = np.shape(queryimg_arr)[0]
+			b = np.shape(similarwordimg_arr)[0]
+			if a < b:
+				queryimg_arr = np.vstack((queryimg_arr,np.full((b-a,np.shape(queryimg_arr)[1]),220)))
+			if a > b:
+				print np.shape(similarwordimg_arr)
+				print np.shape(np.full((a-b,np.shape(similarwordimg_arr)[1]),220))
+				similarwordimg_arr = np.vstack((similarwordimg_arr,np.full((a-b,np.shape(similarwordimg_arr)[1]),220)))
+			print np.shape(queryimg_arr)
+			print np.shape(similarwordimg_arr)
+			queryimg_arr = np.hstack((queryimg_arr,np.zeros(((np.shape(queryimg_arr)[0]),10))))	
+			queryimg_arr = np.hstack((queryimg_arr,similarwordimg_arr))
+		print queryimg_arr[0]
+   		fig = plt.figure()
+  	  	ax = fig.add_subplot(111)
+    		ax.imshow(queryimg_arr, cmap=cm.get_cmap('Greys_r'))
+    		#ax.hold(True)
+    		ax.autoscale(enable=True)
+		plt.show()
+		print doc[word][4]
             
+            
+    """""
     
+    
+    
+    
+    """""
     
     #Das codebook scheint die falschen deskriptoren zu enthalten
     #die deskriptoren aus sifts passen nicht zu denen im codebook
