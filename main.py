@@ -25,7 +25,7 @@ def wordspotting():
     
     segmentsInDoc = {}  
     imageOfDoc = {}     #bilddaten fuer jedes dokument
-    for i in range(len(dataNames))[:10]:
+    for i in range(len(dataNames))[:2]:
         obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
         segs = []   #Liste mit Segementgrenzen und -texten, die in docs{} geschrieben wird
         for line in obj:
@@ -42,7 +42,7 @@ def wordspotting():
     cell_size = 10
     framesInDoc = {}    #koordinaten der deskriporen fuer jedes dokument
     descInDoc = {}      #deskriptor vektor fuer jedes dokument
-    for i in range(len(dataNames))[:10]:     #wenn es fuer die ersten 2 klappt geht es sicher auch fuer alle
+    for i in range(len(dataNames))[:2]:     #wenn es fuer die ersten 2 klappt geht es sicher auch fuer alle
         frames, desc = vlfeat.vl_dsift(imageOfDoc[dataNames[i]], step=step_size, size=cell_size)        #deskriptor koordinaten(frames) und deskriporen(128 dim vektor) berechnen
         frames = frames.T
         desc = np.array(desc.T, dtype=np.float)
@@ -62,7 +62,7 @@ def wordspotting():
     siftsind = []
     siftslinksind = []
     siftsrechtsind = []
-    for name in dataNames[:10]:
+    for name in dataNames[:2]:
         for seg in segmentsInDoc[name]:    #Segmentgrenzen in Dokument durchgehen
             framesifts = [] #Indizes der SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
             framesiftslinks = []
@@ -121,7 +121,7 @@ def wordspotting():
     
     
     wordcount=[]
-    for name in dataNames[:10]:
+    for name in dataNames[:2]:
         for i in range(len(segmentsInDoc[name])):
             counter=0
             for j in range(len(segmentsInDoc[name])):
