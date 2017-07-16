@@ -155,12 +155,14 @@ def wordspotting():
         if wordcount[word] != 1:
             a = wordcount[word]
             count = 0
+            similarWords = ""
             print 'Die Woerter der' , wordcount[word]-1, 'Segmente, die als dem Segment mit dem Wort "', doc[word][4], '" am aehnlichsten erkannt wurden: '
             for i in range(1, wordcount[word]):
-                print doc[dist[word][i]][4]
+                similarWords += str(doc[dist[word][i]][4]) + ", "
                 if doc[dist[word][i]][4] == doc[word][4]:
                     count = count+1
             error = (float(count)/a)*100
+            print similarWords
             print 'Das ergibt eine Erkennungsrate von', error, '%'
             print
             
