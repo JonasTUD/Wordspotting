@@ -15,7 +15,6 @@ import vlfeat
 
 np.set_printoptions(threshold=np.nan)
 
-
 def wordspotting():
 
     #sift, scipy etc laufen bei mir. Habe den vorhandenen ablauf umgeschrieben, so dass er mit den dokumenten klar kommt.
@@ -229,8 +228,6 @@ def wordspotting():
     
     
 
-    # TODO: Spatial Pyramid fuer jedes Segment & Bag-of-Features
-    # uebernimmt: blub
     # Histogramm fuer jedes Segment mit bincount und bins=n_centroid
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
@@ -262,12 +259,7 @@ def wordspotting():
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
     
     bof = np.array(bof)
-    #print bof
-    #print bof[21]
-    #print bof[22]
-    #print bof.shape
-    #print type(bof[0,0])
-    
+
     dist = pdist(bof, 'euclidean')
     print dist.shape
     dist = squareform(dist)
