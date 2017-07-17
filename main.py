@@ -142,7 +142,7 @@ def wordspottingAllDocs():
             print 'Das ergibt eine Erkennungsrate von', error, '%'
             print
 
-def wordspottingOneDoc():1
+def wordspottingOneDoc():
     doc = []    #hier stehen jetzt fuer jedes Segment die Informationen in der Form (xmin, xmax, ymin, ymax, text)
     obj = open("resources/GT/2700270.gtp", "r")
     segs = []   #Liste mit Segementgrenzen und -texten
