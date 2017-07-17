@@ -284,7 +284,7 @@ def wordspottingOneDoc():
 
     for word in range(len(doc)):
         if wordcount[word] != 1:
-            a = wordcount[word]
+            a = wordcount[word]-1
             count = 0
             similarWords = ""
             print 'Die Woerter der' , wordcount[word]-1, 'Segmente, die als dem Segment mit dem Wort "', doc[word][4], '" am aehnlichsten erkannt wurden: '
@@ -293,14 +293,11 @@ def wordspottingOneDoc():
                 if doc[dist[word][i]][4] == doc[word][4]:
                     count = count+1
             error = (float(count)/a)*100
-            print similarWords
             print 'Das ergibt eine Erkennungsrate von', error, '%'
-            print
-
-
 
     #Das codebook scheint die falschen deskriptoren zu enthalten
     #die deskriptoren aus sifts passen nicht zu denen im codebook
+
     """
     npsiftslinks = np.asarray(siftslinks)
     npsiftsrechts = np.asarray(siftsrechts)
