@@ -156,8 +156,20 @@ def wordspottingOneDoc():
     frames = frames.T
     desc = np.array(desc.T, dtype=np.float)
     # Optional: SIFT nach Vorkommen in Segmenten filtern
-    n_centroids = 256
-    #_,labels = kmeans2(desc,n_centroids,iter =40, minit='points')
+
+    framesInSeq = []
+    descInSeq = []
+    for seg in doc:
+        for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
+            #Wenn Deskriptor im aktuellen Segment liegt, Index des Deskriptors abspeichern
+            if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesInSeq.append(frames[i])
+                descInSeq.append(desc[i])
+
+    frames = framesInSeq
+    desc = descInSeq
+    n_centroids = 24
+    _,labels = kmeans2(desc,n_centroids,iter =40, minit='points')
 
     """""
     document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
@@ -212,16 +224,6 @@ def wordspottingOneDoc():
     print "Siftind"
     print siftsind
     print "/Siftind"
-
-    print desc
-    print type(desc[0])
-    print
-    descInSeq = []
-    for seq in np.array(siftsind):
-        for s in seg:
-            descInSeq.append(desc[s])
-    _, labels = kmeans2(desc, n_centroids, iter=40, minit='points')
-
 
     #print siftslinksind
     #print siftsrechtsind
