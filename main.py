@@ -11,18 +11,17 @@ from matplotlib.patches import Circle, Rectangle
 from matplotlib.lines import Line2D
 from numpy import bincount, argsort
 import scipy.sparse
-import vlfeat
+#import vlfeat
 
 np.set_printoptions(threshold=np.nan)
 
-def wordspotting():
-
+def wordspottingAllDocs():
+    import vlfeat
     #sift, scipy etc laufen bei mir. Habe den vorhandenen ablauf umgeschrieben, so dass er mit den dokumenten klar kommt.
-
     # dataNames: alle Namen der Dateien ohne Endung, kann also fuer GT & pages genutzt werden
     dataNames = [ str(name)+"0"+str(name) for name in range(270,280)]+[str(name)+"0"+str(name) for name in range(300,310)]
-    
-    segmentsInDoc = {}  
+
+    segmentsInDoc = {}
     imageOfDoc = {}     #bilddaten fuer jedes dokument
     for i in range(len(dataNames))[:2]:
         obj = open("resources/GT/"+dataNames[i]+".gtp", "r")
@@ -31,12 +30,12 @@ def wordspotting():
             xmin, ymin, xmax, ymax, text = line.split()
             segs.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
         segmentsInDoc[dataNames[i]] = segs
-        
+
         image = Image.open("resources/pages/"+dataNames[i]+".png")
         im_arr = np.asarray(image, dtype='float32')
         imageOfDoc[dataNames[i]] = im_arr
     #print segmentsInDoc
-    
+
     step_size = 45
     cell_size = 10
     framesInDoc = {}    #koordinaten der deskriporen fuer jedes dokument
@@ -48,7 +47,7 @@ def wordspotting():
         framesInDoc[dataNames[i]] = frames
         descInDoc[dataNames[i]] = desc
         print str(dataNames[i]) + " is done " + str(desc.shape)
-    
+
     #print framesInDoc
     #print descInDoc
     descForAllDocs = np.vstack(descInDoc.values())
@@ -56,7 +55,7 @@ def wordspotting():
     n_centroids = 1024
     _,labels = kmeans2(descForAllDocs,n_centroids,iter =40, minit='points') #labels fuer alle deskriptoren in allen dokumenten berechnen
     print "Labels for all desc done " + str(labels.shape)
-    
+
     #da nur deskriptoren in den segmenten interessant sind werden diese jetzt berechnet
     siftsind = []
     siftslinksind = []
@@ -73,15 +72,14 @@ def wordspotting():
                 #fuer linken Teil
                 if seg[0] <= framesInDoc[name][i][0] and (seg[0]+((seg[1]-seg[0])/2)) >= framesInDoc[name][i][0] and seg[2] <= framesInDoc[name][i][1] and seg[3] >= framesInDoc[name][i][1]:
                     framesiftslinks.append(i)
-                #fuer rechten Teil   
+                #fuer rechten Teil
                 if (seg[0]+((seg[1]-seg[0])/2)) < framesInDoc[name][i][0] and seg[1] >= framesInDoc[name][i][0] and seg[2] <= framesInDoc[name][i][1] and seg[3] >= framesInDoc[name][i][1]:
                     framesiftsrechts.append(i)
             siftsind.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
-            siftslinksind.append(framesiftslinks) 
-            siftsrechtsind.append(framesiftsrechts) 
-    
-    print np.array(siftsind).shape  #enthaelt die deskriptoren, die in den segmenten von allen dokumenten liegen
+            siftslinksind.append(framesiftslinks)
+            siftsrechtsind.append(framesiftsrechts)
 
+    print np.array(siftsind).shape  #enthaelt die deskriptoren, die in den segmenten von allen dokumenten liegen
 
     hist1 = []           #Histogramm fuer gesamte Segmente berechnen
     for seg in siftsind:
@@ -89,36 +87,36 @@ def wordspotting():
         for s in seg:
             segarr.append(int(labels[s]))
         hist1.append(np.bincount(np.array(segarr, dtype='int'), minlength = n_centroids))
-    
+
     hist2 = []           #Histogramm fuer linken Segmentteil berechnen
     for seg in siftslinksind:
         segarr =[]
         for s in seg:
             segarr.append(int(labels[s]))
         hist2.append(np.bincount(np.array(segarr, dtype='int'), minlength = n_centroids))
-    
+
     hist3 = []           #Histogramm fuer rechten Segmentteil berechnen
     for seg in siftsrechtsind:
         segarr =[]
         for s in seg:
             segarr.append(int(labels[s]))
         hist3.append(np.bincount(np.array(segarr, dtype='int'), minlength = n_centroids))
-    
+
     print len(hist1)
-    
-    
+
+
     bof = []
     for i in range(len(hist1)): #Histogramme zur BoF-Repraesentation zusammenfuehren
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
-    
+
     bof = np.array(bof)
     dist = pdist(bof, 'euclidean')
     print dist.shape
     dist = squareform(dist)
     dist = argsort(dist)
     print dist.shape
-    
-    
+
+
     wordcount=[]
     for name in dataNames[:2]:
         for i in range(len(segmentsInDoc[name])):
@@ -129,7 +127,7 @@ def wordspotting():
             wordcount.append(counter)
     print np.array(wordcount)
     #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
-    
+
     for word in range(segsForAllDocs.shape[0]):
         if wordcount[word] != 1:
             a = wordcount[word]
@@ -143,15 +141,9 @@ def wordspotting():
             error = (float(count)/a)*100
             print similarWords
             print 'Das ergibt eine Erkennungsrate von', error, '%'
-            print 
-    
-    
-    
-    
-    raise NotImplementedError("Thats all Folks")
-    
-    
-    
+            print
+
+def wordspottingOneDoc():
     doc = []    #hier stehen jetzt fuer jedes Segment die Informationen in der Form (xmin, xmax, ymin, ymax, text)
     obj = open("resources/GT/2700270.gtp", "r")
     segs = []   #Liste mit Segementgrenzen und -texten
@@ -212,52 +204,52 @@ def wordspotting():
             #fuer linken Teil
             if seg[0] <= frames[i][0] and (seg[0]+((seg[1]-seg[0])/2)) >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
                 framesiftslinks.append(i)
-            #fuer rechten Teil   
+            #fuer rechten Teil
             if (seg[0]+((seg[1]-seg[0])/2)) < frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
                 framesiftsrechts.append(i)
         siftsind.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
-        siftslinksind.append(framesiftslinks) 
-        siftsrechtsind.append(framesiftsrechts) 
+        siftslinksind.append(framesiftslinks)
+        siftsrechtsind.append(framesiftsrechts)
     print siftsind
     print siftslinksind
     print siftsrechtsind
     #in sifts[] stehen jetzt an i-ter Stelle die Indizes der Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
-    
+
     #analog stehen in siftslinks und siftsrechts die bei der Berechnung der Spatial Pyramid notwendigen Indizes der
     #Deskriptoren im linken und rechten Segmentausschnitt
-    
-    
+
+
 
     # Histogramm fuer jedes Segment mit bincount und bins=n_centroid
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
- 
+
     hist1 = []           #Histogramm fuer gesamte Segmente berechnen
     for seg in siftsind:
         segarr =[]
         for s in seg:
             segarr.append(labels[s])
         hist1.append(np.bincount(np.array(segarr), minlength = n_centroids))
-    
+
     hist2 = []           #Histogramm fuer linken Segmentteil berechnen
     for seg in siftslinksind:
         segarr =[]
         for s in seg:
             segarr.append(labels[s])
         hist2.append(np.bincount(np.array(segarr), minlength = n_centroids))
-    
+
     hist3 = []           #Histogramm fuer rechten Segmentteil berechnen
     for seg in siftsrechtsind:
         segarr =[]
         for s in seg:
             segarr.append(labels[s])
         hist3.append(np.bincount(np.array(segarr), minlength = n_centroids))
-    
+
     bof = []
-    #print type(hist1[0])    
+    #print type(hist1[0])
     for i in range(len(hist1)): #Histogramme zur BoF-Repraesentation zusammenfuehren
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
-    
+
     bof = np.array(bof)
 
     dist = pdist(bof, 'euclidean')
@@ -265,7 +257,7 @@ def wordspotting():
     dist = squareform(dist)
     dist = argsort(dist)
     print dist
-    
+
     wordcount=[]
     for i in range(len(doc)):
         counter=0
@@ -275,7 +267,7 @@ def wordspotting():
         wordcount.append(counter)
     #print wordcount
     #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
-    
+
     for word in range(len(doc)):
         if wordcount[word] != 1:
             a = wordcount[word]
@@ -290,9 +282,9 @@ def wordspotting():
             print similarWords
             print 'Das ergibt eine Erkennungsrate von', error, '%'
             print
-            
-    
-    
+
+
+
     #Das codebook scheint die falschen deskriptoren zu enthalten
     #die deskriptoren aus sifts passen nicht zu denen im codebook
     """
@@ -319,11 +311,8 @@ def wordspotting():
     # boolsche matrix/schleifen um Vorkommen zu identifizieren
     # uebernimmt: Jonas
 
-    
-    
-
     # TODO: Fehlerevaluierung
     # uebernimmt: recharge
 
 if __name__ == '__main__':
-    wordspotting()
+    wordspottingOneDoc()
