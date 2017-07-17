@@ -21,8 +21,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="286" column="33" lean-forward="false" selection-start-line="286" selection-start-column="33" selection-end-line="286" selection-end-column="33" />
+            <state relative-caret-position="742">
+              <caret line="223" column="0" lean-forward="false" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
                 <element signature="e#471#6722#0" expanded="false" />
@@ -554,7 +554,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500284994571</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Wordcount">
+      <created>1500285950799</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1500285950799</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -670,7 +677,8 @@
     <MESSAGE value="Import rausgenommen" />
     <MESSAGE value="Indent Fehler behoben" />
     <MESSAGE value="Frames &amp; Desc nach Segmenten gefiltert" />
-    <option name="LAST_COMMIT_MESSAGE" value="Frames &amp; Desc nach Segmenten gefiltert" />
+    <MESSAGE value="Wordcount" />
+    <option name="LAST_COMMIT_MESSAGE" value="Wordcount" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1127,8 +1135,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="286" column="33" lean-forward="false" selection-start-line="286" selection-start-column="33" selection-end-line="286" selection-end-column="33" />
+        <state relative-caret-position="742">
+          <caret line="223" column="0" lean-forward="false" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
             <element signature="e#471#6722#0" expanded="false" />
