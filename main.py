@@ -96,8 +96,6 @@ def wordspotting():
     
     
 
-    # TODO: Spatial Pyramid fuer jedes Segment & Bag-of-Features
-    # uebernimmt: blub
     # Histogramm fuer jedes Segment mit bincount und bins=n_centroid
     # Spatial Pyramid: SIFT in ganzem, linken, rechten Segment zaehlen (Histogramm)
     # Bag-of-Features: Vektor mit 3*n Werten
@@ -124,17 +122,11 @@ def wordspotting():
         hist3.append(np.bincount(np.array(segarr), minlength = n_centroids))
     
     bof = []
-    #print type(hist1[0])    
     for i in range(len(hist1)): #Histogramme zur BoF-Repraesentation zusammenfuehren
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
     
     bof = np.array(bof)
-    #print bof
-    #print bof[21]
-    #print bof[22]
-    #print bof.shape
-    #print type(bof[0,0])
-    
+
     dist = pdist(bof, 'euclidean')
     print dist.shape
     dist = squareform(dist)
@@ -194,15 +186,7 @@ def wordspotting():
     		ax.autoscale(enable=True)
 		plt.show()
 		print doc[word][4]
-            
-            
-    """""
-    
-    
-    
-    
-    """""
-    
+
     #Das codebook scheint die falschen deskriptoren zu enthalten
     #die deskriptoren aus sifts passen nicht zu denen im codebook
     """
