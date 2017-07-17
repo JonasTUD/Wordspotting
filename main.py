@@ -51,7 +51,7 @@ def wordspottingAllDocs():
     #print descInDoc
     descForAllDocs = np.vstack(descInDoc.values())
     segsForAllDocs = np.vstack(segmentsInDoc.values())     #sammlung aller segmente und woerter in den dokumenten
-    n_centroids = 1024
+    n_centroids = 20
     _,labels = kmeans2(descForAllDocs,n_centroids,iter =40, minit='points') #labels fuer alle deskriptoren in allen dokumenten berechnen
     print "Labels for all desc done " + str(labels.shape)
 
@@ -168,7 +168,7 @@ def wordspottingOneDoc():
 
     frames = framesInSeq
     desc = descInSeq
-    n_centroids = 24
+    n_centroids = 20
     _,labels = kmeans2(desc,n_centroids,iter =40, minit='points')
 
     """""
@@ -281,22 +281,55 @@ def wordspottingOneDoc():
         wordcount.append(counter)
     #print wordcount
     #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
-
+    sumerror =0
+    counterrror =0
     for word in range(len(doc)):
         if wordcount[word] != 1:
             a = wordcount[word]
+            #if a<5:
+            	#a=5
             count = 0
             similarWords = ""
             print 'Die Woerter der' , wordcount[word]-1, 'Segmente, die als dem Segment mit dem Wort "', doc[word][4], '" am aehnlichsten erkannt wurden: '
-            for i in range(1, wordcount[word]):
+            for i in range(1, a):
                 similarWords += str(doc[dist[word][i]][4]) + ", "
                 if doc[dist[word][i]][4] == doc[word][4]:
                     count = count+1
             error = (float(count)/a)*100
+            sumerror = sumerror+ error
+            counterrror =counterrror+1
             print similarWords
             print 'Das ergibt eine Erkennungsrate von', error, '%'
             print
-
+            if error >=50:
+		document_image_filename = 'resources/pages/2700270.png'
+    		image = Image.open(document_image_filename)
+    		im_arr = np.asarray(image, dtype='float32')
+		#print im_arr
+		queryimg_arr = im_arr[doc[word][2]:doc[word][3],doc[word][0]:doc[word][1]]
+    		for i in range(1, wordcount[word]):
+			similarwordimg_arr = im_arr[doc[dist[word][i]][2]:doc[dist[word][i]][3],doc[dist[word][i]][0]:doc[dist[word][i]][1]]
+			a = np.shape(queryimg_arr)[0]
+			b = np.shape(similarwordimg_arr)[0]
+			if a < b:
+				queryimg_arr = np.vstack((queryimg_arr,np.full((b-a,np.shape(queryimg_arr)[1]),220)))
+			if a > b:
+				print np.shape(similarwordimg_arr)
+				print np.shape(np.full((a-b,np.shape(similarwordimg_arr)[1]),220))
+				similarwordimg_arr = np.vstack((similarwordimg_arr,np.full((a-b,np.shape(similarwordimg_arr)[1]),220)))
+			print np.shape(queryimg_arr)
+			print np.shape(similarwordimg_arr)
+			queryimg_arr = np.hstack((queryimg_arr,np.zeros(((np.shape(queryimg_arr)[0]),10))))	
+			queryimg_arr = np.hstack((queryimg_arr,similarwordimg_arr))
+		print queryimg_arr[0]
+   		fig = plt.figure()
+  	  	ax = fig.add_subplot(111)
+    		ax.imshow(queryimg_arr, cmap=cm.get_cmap('Greys_r'))
+    		#ax.hold(True)
+    		ax.autoscale(enable=True)
+		plt.show()
+    print "mean average precision:"
+    print sumerror/counterrror
 
 
     #Das codebook scheint die falschen deskriptoren zu enthalten
