@@ -55,8 +55,8 @@ def wordspotting():
     descForAllDocs = np.vstack(descInDoc.values())
     segsForAllDocs = np.vstack(segmentsInDoc.values())     #sammlung aller segmente und woerter in den dokumenten
     n_centroids = 1024
-    _,labels = kmeans2(descForAllDocs,n_centroids,iter =40, minit='points') #labels fuer alle deskriptoren in allen dokumenten berechnen
-    print "Labels for all desc done " + str(labels.shape)
+    #_,labels = kmeans2(descForAllDocs,n_centroids,iter =40, minit='points') #labels fuer alle deskriptoren in allen dokumenten berechnen
+    #print "Labels for all desc done " + str(labels.shape)
     
     #da nur deskriptoren in den segmenten interessant sind werden diese jetzt berechnet
     siftsind = []
@@ -82,6 +82,19 @@ def wordspotting():
             siftsrechtsind.append(framesiftsrechts) 
     
     print np.array(siftsind).shape  #enthaelt die deskriptoren, die in den segmenten von allen dokumenten liegen
+
+    descInSegs = []
+    descInSegs=np.array(desc)
+    for doc in descInDoc:
+        desc = descInDoc[doc]
+        
+    for i in siftsind:
+        descInSegs = np.vstack((descInSegs, descForAllDocs[i,:]))
+   # descInSegs = np.array(descInSegs)
+    print descInSegs.shape
+    print descForAllDocs.shape
+
+
 
 
     hist1 = []           #Histogramm fuer gesamte Segmente berechnen
