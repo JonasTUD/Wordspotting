@@ -11,7 +11,6 @@ from matplotlib.patches import Circle, Rectangle
 from matplotlib.lines import Line2D
 from numpy import bincount, argsort
 import scipy.sparse
-#import vlfeat
 
 np.set_printoptions(threshold=np.nan)
 
@@ -143,7 +142,7 @@ def wordspottingAllDocs():
             print 'Das ergibt eine Erkennungsrate von', error, '%'
             print
 
-def wordspottingOneDoc():
+def wordspottingOneDoc():1
     doc = []    #hier stehen jetzt fuer jedes Segment die Informationen in der Form (xmin, xmax, ymin, ymax, text)
     obj = open("resources/GT/2700270.gtp", "r")
     segs = []   #Liste mit Segementgrenzen und -texten
@@ -158,7 +157,7 @@ def wordspottingOneDoc():
     desc = np.array(desc.T, dtype=np.float)
     # Optional: SIFT nach Vorkommen in Segmenten filtern
     n_centroids = 256
-    _,labels = kmeans2(desc,n_centroids,iter =40, minit='points')
+    #_,labels = kmeans2(desc,n_centroids,iter =40, minit='points')
 
     """""
     document_image_filename = 'resources/pages/'+dataNames[0]+'.png'
@@ -210,9 +209,22 @@ def wordspottingOneDoc():
         siftsind.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
         siftslinksind.append(framesiftslinks)
         siftsrechtsind.append(framesiftsrechts)
+    print "Siftind"
     print siftsind
-    print siftslinksind
-    print siftsrechtsind
+    print "/Siftind"
+
+    print desc
+    print type(desc[0])
+    print
+    descInSeq = []
+    for seq in np.array(siftsind):
+        for s in seg:
+            descInSeq.append(desc[s])
+    _, labels = kmeans2(desc, n_centroids, iter=40, minit='points')
+
+
+    #print siftslinksind
+    #print siftsrechtsind
     #in sifts[] stehen jetzt an i-ter Stelle die Indizes der Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
 
     #analog stehen in siftslinks und siftsrechts die bei der Berechnung der Spatial Pyramid notwendigen Indizes der
