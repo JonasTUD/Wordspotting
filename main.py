@@ -221,10 +221,6 @@ def wordspottingOneDoc():
         siftsind.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
         siftslinksind.append(framesiftslinks)
         siftsrechtsind.append(framesiftsrechts)
-    print "Siftind"
-    print siftsind
-    print "/Siftind"
-
     #print siftslinksind
     #print siftsrechtsind
     #in sifts[] stehen jetzt an i-ter Stelle die Indizes der Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
@@ -285,9 +281,9 @@ def wordspottingOneDoc():
     counterrror =0
     for word in range(len(doc)):
         if wordcount[word] != 1:
-            a = wordcount[word]
-            #if a<5:
-            	#a=5
+
+            a = wordcount[word]-1
+
             count = 0
             similarWords = ""
             print 'Die Woerter der' , wordcount[word]-1, 'Segmente, die als dem Segment mit dem Wort "', doc[word][4], '" am aehnlichsten erkannt wurden: '
@@ -332,8 +328,6 @@ def wordspottingOneDoc():
     print sumerror/counterrror
 
 
-    #Das codebook scheint die falschen deskriptoren zu enthalten
-    #die deskriptoren aus sifts passen nicht zu denen im codebook
     """
     npsiftslinks = np.asarray(siftslinks)
     npsiftsrechts = np.asarray(siftsrechts)
@@ -341,25 +335,6 @@ def wordspottingOneDoc():
     np.shape(np.bincount(npsiftsrechts,minlength=n_centroids))
     """
     # Rueckgabe: Matrix: Anzahl Segmente X (4096*3)
-    # Bitte Rueckgabe bof nennen!
-
-    #bof = [[]]
-
-    # TODO: Distanz des Inputs durch Cosinusdistanz
-    # pdist, argsort,
-    # uebernimmt: blub
-
-    # Frage: Warum pdist? So wuerden wir ja jedes Vorkommen von einem Centroiden mit dem im anderen Segment vergleichen und nur die am naechsten zueinander stehenden Centroiden finden
-    # Glaube daher cdist ist richtig
-
-    #bofDist = cdist(bof,bof, 'cosine')
-    #bofDistArgsort = (np.argsort(bofDist))[:,1:]
-
-    # boolsche matrix/schleifen um Vorkommen zu identifizieren
-    # uebernimmt: Jonas
-
-    # TODO: Fehlerevaluierung
-    # uebernimmt: recharge
 
 if __name__ == '__main__':
     wordspottingOneDoc()
