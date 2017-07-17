@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import PIL.Image as Image
 import matplotlib
-#import vlfeat
+import vlfeat
 from scipy.cluster.vq import kmeans2
 from scipy.spatial.distance import cdist, pdist, squareform
 from matplotlib.patches import Circle, Rectangle
@@ -84,15 +84,12 @@ def wordspotting():
     print np.array(siftsind).shape  #enthaelt die deskriptoren, die in den segmenten von allen dokumenten liegen
 
     descInSegs = []
-    descInSegs=np.array(desc)
-    for doc in descInDoc:
-        desc = descInDoc[doc]
-        
-    for i in siftsind:
-        descInSegs = np.vstack((descInSegs, descForAllDocs[i,:]))
-   # descInSegs = np.array(descInSegs)
-    print descInSegs.shape
-    print descForAllDocs.shape
+    for seg in np.array(siftsind):
+        for s in seg:
+            descInSegs.append(descForAllDocs[s])
+    
+    print np.array(descInSegs).shape
+    _,labels = kmeans2(descForAllDocs,n_centroids,iter =40, minit='points') #labels fuer alle deskriptoren in allen dokumenten berechnen
 
 
 
