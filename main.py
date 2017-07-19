@@ -109,6 +109,7 @@ def wordspottingAllDocs():
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
 
     bof = np.array(bof)
+    
     dist = pdist(bof, 'cosine')
     print dist.shape
     dist = squareform(dist)
@@ -150,41 +151,40 @@ def wordspottingOneDoc():
     for line in obj:
         xmin, ymin, xmax, ymax, text = line.split()
         doc.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
-    step_size = 5
+    step_size = 4
     cell_size = 10
     #pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
     #frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
     im_arr = np.asarray(image, dtype='float32')
-    #frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)
-    #frames = frames.T
-    #desc = np.array(desc.T, dtype=np.float)
-    #pickle.dump( frames, open( "frames.p", "wb" ) )
-    #pickle.dump( desc, open( "desc.p", "wb" ) )
-    frames = pickle.load( open( "frames.p", "rb" ) )
-    desc = pickle.load( open( "desc.p", "rb" ) )
+    frames, desc = vlfeat.vl_dsift(im_arr, step=step_size, size=cell_size)
+    frames = frames.T
+    desc = np.array(desc.T, dtype=np.float)
+    pickle.dump( frames, open( "frames.p", "wb" ) )
+    pickle.dump( desc, open( "desc.p", "wb" ) )
+    #frames = pickle.load( open( "frames.p", "rb" ) )
+    #desc = pickle.load( open( "desc.p", "rb" ) )
     # Optional: SIFT nach Vorkommen in Segmenten filtern
+    print 'Deskriptoren berechnet'
 
-    #===========================================================================
-    # framesInSeq = []
-    # descInSeq = []
-    # for seg in doc:
-    #     for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
-    #         #Wenn Deskriptor im aktuellen Segment liegt, Index des Deskriptors abspeichern
-    #         if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
-    #             framesInSeq.append(frames[i])
-    #             descInSeq.append(desc[i])
-    # print 'Segmente entfernt'
-    # pickle.dump( framesInSeq, open( "framesInSeq.p", "wb" ) )
-    # pickle.dump( descInSeq, open( "descInSeq.p", "wb" ) )
-    #===========================================================================
-    framesInSeq = pickle.load( open( "framesInSeq.p", "rb" ) )
-    descInSeq = pickle.load( open( "descInSeq.p", "rb" ) )
+    framesInSeq = []
+    descInSeq = []
+    for seg in doc:
+        for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
+            #Wenn Deskriptor im aktuellen Segment liegt, Index des Deskriptors abspeichern
+            if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesInSeq.append(frames[i])
+                descInSeq.append(desc[i])
+    print 'Segmente entfernt'
+    #pickle.dump( framesInSeq, open( "framesInSeq.p", "wb" ) )
+    #pickle.dump( descInSeq, open( "descInSeq.p", "wb" ) )
+    #framesInSeq = pickle.load( open( "framesInSeq.p", "rb" ) )
+    #descInSeq = pickle.load( open( "descInSeq.p", "rb" ) )
 
     frames = framesInSeq
     desc = np.array(descInSeq)
-    n_centroids = 256
+    n_centroids = 2048
     _,labels = kmeans2(desc,n_centroids,iter =20, minit='points')
-    pickle.dump( labels, open( "labels.p", "wb" ) )
+    #pickle.dump( labels, open( "labels.p", "wb" ) )
     print 'kmeans berechnet'
 
     """""
@@ -217,38 +217,36 @@ def wordspottingOneDoc():
     plt.show()
     """""
 
-    #===========================================================================
-    # siftsind = []
-    # siftslinksind = []
-    # siftsrechtsind = []
-    # for seg in doc:    #Segmentgrenzen in Dokument durchgehen
-    #     framesifts = [] #Indizes der SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
-    #     framesiftslinks = []
-    #     framesiftsrechts = []
-    #     for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
-    #         #Wenn Deskriptor im aktuellen Segment liegt, Index des Deskriptors abspeichern
-    #         if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
-    #             framesifts.append(i)
-    #         #fuer linken Teil
-    #         if seg[0] <= frames[i][0] and (seg[0]+((seg[1]-seg[0])/2)) >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
-    #             framesiftslinks.append(i)
-    #         #fuer rechten Teil
-    #         if (seg[0]+((seg[1]-seg[0])/2)) < frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
-    #             framesiftsrechts.append(i)
-    #     siftsind.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
-    #     siftslinksind.append(framesiftslinks)
-    #     siftsrechtsind.append(framesiftsrechts)
-    # #print siftslinksind
-    # #print siftsrechtsind
-    # #in sifts[] stehen jetzt an i-ter Stelle die Indizes der Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
-    # print 'Deskriptoren pro Segment gefiltert'
-    # pickle.dump( siftsind, open( "siftsind.p", "wb" ) )
-    # pickle.dump( siftslinksind, open( "siftslinksind.p", "wb" ) )
-    # pickle.dump( siftsrechtsind, open( "siftsrechtsind.p", "wb" ) )
-    #===========================================================================
-    siftsind = pickle.load( open( "siftsind.p", "rb" ) )
-    siftslinksind = pickle.load( open( "siftslinksind.p", "rb" ) )
-    siftsrechtsind = pickle.load( open( "siftsrechtsind.p", "rb" ) )
+    siftsind = []
+    siftslinksind = []
+    siftsrechtsind = []
+    for seg in doc:    #Segmentgrenzen in Dokument durchgehen
+        framesifts = [] #Indizes der SIFT-Deskriptoren, die zu aktuellem Segement gehoeren
+        framesiftslinks = []
+        framesiftsrechts = []
+        for i in range(len(frames)):  #Zentren der berechneten SIFT-Deskriporen durchgehen
+            #Wenn Deskriptor im aktuellen Segment liegt, Index des Deskriptors abspeichern
+            if seg[0] <= frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesifts.append(i)
+            #fuer linken Teil
+            if seg[0] <= frames[i][0] and (seg[0]+((seg[1]-seg[0])/2)) >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesiftslinks.append(i)
+            #fuer rechten Teil
+            if (seg[0]+((seg[1]-seg[0])/2)) < frames[i][0] and seg[1] >= frames[i][0] and seg[2] <= frames[i][1] and seg[3] >= frames[i][1]:
+                framesiftsrechts.append(i)
+        siftsind.append(framesifts)   #zu aktuellem Segment gehoerende Deskriptoren zu Liste mit Deskriptoren im Dokument hinzufuegen
+        siftslinksind.append(framesiftslinks)
+        siftsrechtsind.append(framesiftsrechts)
+    #print siftslinksind
+    #print siftsrechtsind
+    #in sifts[] stehen jetzt an i-ter Stelle die Indizes der Deskriptoren, die zum ganzen i-ten Segement im Dokument gehoeren
+    print 'Deskriptoren pro Segment gefiltert'
+    #pickle.dump( siftsind, open( "siftsind.p", "wb" ) )
+    #pickle.dump( siftslinksind, open( "siftslinksind.p", "wb" ) )
+    #pickle.dump( siftsrechtsind, open( "siftsrechtsind.p", "wb" ) )
+    #siftsind = pickle.load( open( "siftsind.p", "rb" ) )
+    #siftslinksind = pickle.load( open( "siftslinksind.p", "rb" ) )
+    #siftsrechtsind = pickle.load( open( "siftsrechtsind.p", "rb" ) )
 
     #analog stehen in siftslinks und siftsrechts die bei der Berechnung der Spatial Pyramid notwendigen Indizes der
     #Deskriptoren im linken und rechten Segmentausschnitt
@@ -286,7 +284,13 @@ def wordspottingOneDoc():
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
 
     bof = np.array(bof)
+    print 'bof vorher', bof[0,:]
     print 'Spatial Pyramid erstellt'
+    norm = np.linalg.norm(bof, axis=1)   #bof normalisieren
+    norm = norm.T
+    print 'shape norm', norm.shape
+    bof = bof/norm[:,None]
+    print 'bof normalisiert', bof[0,:]
 
     dist = pdist(bof, 'cosine')
     #print dist.shape
@@ -306,22 +310,22 @@ def wordspottingOneDoc():
     #in wordcount[i] steht, wie oft der Text des i-ten Segments insgesamt im Dokument vorkommt (erleichtert die Evaluation)
     
     ap = []
-    for i in range(len(wordcount) ):
-        if wordcount[i] != 1:
+    for i in range(len(wordcount)):
+        if wordcount[i] > 1:
             result = []
-            for j in range( len(wordcount)):
+            for j in range(0, len(wordcount)):
                 if doc[dist[i][j]][4] == doc[i][4]:
                     result.append(1)
                 else:
                     result.append(0)
             p = []
+            result = result[1:]
             print 'result fuer Wort', doc[i][4], result
             for k in range(0, len(result)):
-                p.append((np.sum(result[:k])/k)*result[k])
+                p.append((np.sum(result[:(k+1)])/float(k+1))*result[k])
             pk = sum(p)
-            print 'pk fuer Wort', doc[i][4], pk
             rel2 = np.sum(result)
-            print 'rel2 fuer Wort', doc[i][4], rel2
+            print float(pk)/rel2
             ap.append(float(pk)/rel2)
     print ap
     map = np.sum(ap)/len(ap)
