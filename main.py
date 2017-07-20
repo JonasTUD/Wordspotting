@@ -151,8 +151,8 @@ def wordspottingOneDoc():
     for line in obj:
         xmin, ymin, xmax, ymax, text = line.split()
         doc.append(list((int(xmin), int(xmax), int(ymin), int(ymax), text)))
-    step_size = 4
-    cell_size = 10
+    step_size = 5
+    cell_size = 12
     #pickle_densesift_fn = 'resources/Sift/2700270-full_dense-%d_sift-%d_descriptors.p' % (step_size, cell_size)
     #frames, desc = pickle.load(open(pickle_densesift_fn, 'rb'))
     im_arr = np.asarray(image, dtype='float32')
@@ -284,13 +284,12 @@ def wordspottingOneDoc():
         bof.append(np.array(list(hist1[i]) + list(hist2[i]) + list(hist3[i])))
 
     bof = np.array(bof)
-    print 'bof vorher', bof[0,:]
     print 'Spatial Pyramid erstellt'
-    norm = np.linalg.norm(bof, axis=1)   #bof normalisieren
-    norm = norm.T
-    print 'shape norm', norm.shape
-    bof = bof/norm[:,None]
-    print 'bof normalisiert', bof[0,:]
+    #norm = np.linalg.norm(bof, axis=1)   #bof normalisieren
+    #norm = norm.T
+    #print 'shape norm', norm.shape
+    #bof = bof/norm[:,None]
+    bof = np.sqrt(bof)  #Wurzel ziehen
 
     dist = pdist(bof, 'cosine')
     #print dist.shape
